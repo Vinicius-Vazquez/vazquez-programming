@@ -1,0 +1,264 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <locale.h>
+
+// Função que exibe o menu principal com as opções disponíveis
+void menu()
+{
+	printf("\t\t\tLista 1\n");
+	printf("\n");
+	printf("Com qual dos exercícios você quer trabalhar?\n");
+	printf("\n");
+	printf("Digite 1 para Média e Desvio Padrão\n"); // Exercício 1
+	printf("Digite 2 para Inequação Quociente\n");  // Exercício 2
+	printf("Digite 3 para Tipo de Media\n");        // Exercício 3
+	printf("Digite 4 para Bônus de Natal\n");       // Exercício 4
+	printf("\n");
+	printf("Digite sua opção: ");
+}
+
+int main()
+{
+	// Define o idioma para português (acentuação correta no terminal)
+	setlocale(LC_ALL, "Portuguese");
+	
+	int opcao; // Variável para armazenar a escolha do usuário
+	
+	// Exibe o menu e lê a opção escolhida
+	menu();
+	scanf("%d", &opcao);
+
+	// Estrutura principal que direciona para cada exercício
+	switch (opcao)
+	{
+	    case 1:
+	    	
+	    	// Variáveis para cálculo da média e desvio padrão
+	    	float num1, num2, num3, media, desvio;
+	    	
+	    	printf("\n\n\n");
+	    	printf("1- Para calcular a média e o desvio padrão insira 3 números\n");
+	    	
+	    	// Entrada dos valores
+	    	printf("Primeiro número: \n");
+	    	scanf("%f", &num1);
+	    	
+	    	printf("Segundo número: \n");
+	    	scanf("%f", &num2);
+	    	
+	    	printf("Terceiro número: \n");
+	    	scanf("%f", &num3);
+	
+	    	// Cálculo da média aritmética simples
+	    	media = (num1+num2+num3)/3.00;
+	    	
+	    	// Cálculo do desvio padrão
+	    	// Fórmula: raiz quadrada da média dos quadrados das diferenças em relação à média
+	    	desvio = sqrt(((pow(num1-media,2))+(pow(num2-media,2))+(pow(num3-media,2)))/3.00);
+	    	
+	    	// Saída dos resultados
+	    	printf("\n");
+	    	printf("A média dos números é: %.2f\n", media);
+	    	printf("O desvio padrão dos números é: %.2f\n", desvio);
+	    	break;
+	    	
+	    case 2:
+	    
+	    	// Variáveis para inequação
+	    	float num4, formula;
+	    	
+	    	printf("\n\n\n");
+	    	printf("2- Digite um número para saber se satisfaz a inequação quociente: ");
+	    	scanf("%f", &num4);
+	    	
+	    	// Verifica se o valor causa divisão por zero
+	    	if (num4==2)
+	    	    printf("Valor 2 proíbido, pois na matemática divisão por zero é indefinida!");
+	    	else
+	    	{
+	    	    // Fórmula da inequação
+	    	    formula = (num4-3.0)/((2.0*num4)-4.0);
+	    	    
+	    	    // Verifica se satisfaz a condição (<= 0)
+	    	    if (formula<=0)
+	    	    {
+	    	    	printf("\n");
+	    	    	printf("O número satisfaz a inequação quociente!");
+	    	    }
+	    	    else
+	    	    {
+	    	        printf("\n");
+	    	        printf("O número não satisfaz a inequação quociente!");
+	    	    }
+	    	}
+	        break;
+	    	
+	    case 3:
+        
+            // Variáveis para escolha do tipo de média
+            char escolha;
+            int tipo;
+            
+            // Variáveis para os números e resultados
+            float num5, num6, num7, aritmetica, ponderada, harmonica;
+            
+	    	printf("\n\n\n");
+	    	printf("3- Digite com qual média você quer trabalhar as três notas:\n\n");
+            
+            // Menu de escolha do tipo de média
+            printf("Digite A para média aritimética\n");
+            printf("Digite P para média ponderada\n");
+            printf("Digite H para média hamônica\n\n");
+            printf("Com qual média você quer trabalhar?\n");
+            
+            scanf(" %c", &escolha);
+                    
+            // Conversão da escolha para um tipo numérico
+            if (escolha=='A'||escolha=='a')
+                tipo = 1;
+            else if (escolha=='P'||escolha=='p')
+                tipo = 2;
+            else if (escolha=='H'||escolha=='h')
+                tipo = 3;
+            else {
+                // Caso o usuário digite uma opção inválida
+                printf("\nValor Inválido!");
+                return 0;    
+            }    
+                
+            // Entrada dos três valores
+            printf("\nPrimeiro número: \n");
+	    	scanf("%f", &num5);
+	    	
+	    	printf("Segundo número: \n");
+	    	scanf("%f", &num6);
+	    	
+	    	printf("Terceiro número: \n");
+	    	scanf("%f", &num7);   
+                
+            // Estrutura para calcular o tipo de média escolhido
+            switch (tipo)
+            {
+                case 1:
+                
+                    // Média aritmética simples
+                    aritmetica = (num5+num6+num7)/3.00;
+                    
+                    printf("\nA média aritmética dos números é: %.2f", aritmetica);
+                    break;
+                
+                case 2:
+                
+                    // Média ponderada (pesos: 3, 3 e 4)
+                    ponderada = ((num5*3.00)+(num6*3.00)+(num7*4.00))/10.00;
+                    
+                    printf("\nA média ponderada dos números é: %.2f", ponderada);
+                    break;
+                    
+                case 3:
+                
+                    // Média harmônica (não permite valores zero)
+                    if (num5!=0 && num6!=0 && num7!=0)
+                    {
+                        harmonica = 3.00/((1.00/num5)+(1.00/num6)+(1.00/num7));
+                    
+                        printf("\nA média harmônica dos números é: %.2f", harmonica);
+                    } else {
+                        // Tratamento de erro (divisão por zero)
+                        printf("Valor Inválido!\nNão é possível divisão por 0!\n");
+                    }
+                    break;
+            }
+            break;
+            
+        case 4: 
+        
+            // Variáveis para cálculo do bônus
+            char sexo;
+            float tempoTrabalho, salario, bMasculino, bFeminino, bTotal, fTotal, demais;
+            
+            printf("\n\n\n");
+            printf("Para saber qual será o Bônus de Natal preencha as informações\n\n");
+            
+            // Entrada do sexo do funcionário
+            printf("Qual o sexo do funcionário?\nPara feminino digite F\nPara masculino digite M\n");
+            printf("Resposta: \n");
+            scanf(" %c", &sexo);
+            
+            // Caso masculino
+            if (sexo=='M' || sexo=='m')
+            {
+                printf("\nQuantos anos de casa o funcionário tem?\n");
+                printf("Resposta: \n");
+                scanf("%f", &tempoTrabalho);
+            
+                int tempoInteiro = tempoTrabalho; // Converte para inteiro
+                
+                if (tempoInteiro >= 15)
+                {
+                    printf("\nQual o valor do sálario?\n");
+                    printf("Resposta: \n");
+                    scanf("%f", &salario);
+                    
+                    // Bônus de 20%
+                    bMasculino = salario*0.2;
+                    bTotal = salario+bMasculino;
+                    
+                    printf("\nO valor do bônus é R$%.2f e o sário total será R$%.2f", bMasculino, bTotal);
+                } else {
+                    printf("\nQual o valor do sálario?\n");
+                    printf("Resposta: \n");
+                    scanf("%f", &salario);
+                    
+                    // Bônus fixo de R$100
+                    demais = salario+100;
+                    
+                    printf("\nO valor do bônus é R$100,00 e o sálario total será R$%.2f", demais);
+                }
+            
+            } 
+            // Caso feminino
+            else if (sexo=='F' || sexo=='f')
+            {
+                printf("\nQuantos anos de casa a funcionária tem?\n");
+                printf("Resposta: \n");
+                scanf("%f", &tempoTrabalho);
+            
+                int tempoInteiro = tempoTrabalho;
+                
+                if (tempoInteiro >= 10)
+                {
+                    printf("\nQual o valor do sálario?\n");
+                    printf("Resposta: \n");
+                    scanf("%f", &salario);
+                    
+                    // Bônus de 25%
+                    bFeminino = salario*0.25;
+                    bTotal = salario+bFeminino;
+                    
+                    printf("\nO valor do bônus é R$%.2f e o sário total será R$%.2f\n", bFeminino, bTotal);
+                } else {
+                    printf("\nQual o valor do sálario?\n");
+                    printf("Resposta: \n");
+                    scanf("%f", &salario);
+                    
+                    // Bônus fixo de R$100
+                    demais = salario+100;
+                    
+                    printf("\nO valor do bônus é R$100,00 e o sálario total será R$%.2f", demais);
+                }
+            } 
+            else {
+                // Caso o sexo informado não seja válido
+                printf("Sexo não encontrado!\n");
+            }
+            break;
+            
+        default:
+            // Caso a opção do menu não exista
+            printf("Exercício não encontrado!");
+	}
+	
+	return 0;
+}
